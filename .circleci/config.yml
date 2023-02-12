@@ -1,5 +1,14 @@
 version: 2.1
 
+commands:
+  destroy_environment:
+    steps:
+      - run:
+          name: Destroy environment
+          when: on_fail
+          command: |
+            aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5}
+
 jobs:
   create_infrastructure:
     docker:
@@ -41,17 +50,21 @@ jobs:
     docker:
       - image: alpine:latest
     steps:
-      - run: apk add --update curl
       - run:
-          name: smoke test
-          command: |
-            URL="https://blog.udacitys.com/"
-            if curl -s --head ${URL} 
-            then
-              return 0
-            else
-              return 1
-            fi
+          name: Test job
+          command: return 1
+      - destroy_environment
+      # - run: apk add --update curl
+      # - run:
+      #     name: smoke test
+      #     command: |
+      #       URL="https://blog.udacitys.com/"
+      #       if curl -s --head ${URL}
+      #       then
+      #         return 0
+      #       else
+      #         return 1
+      #       fi
 
 workflows:
   smoke_test:
