@@ -67,6 +67,8 @@ jobs:
       #       fi
 
 workflows:
-  smoke_test:
+  rollback:
     jobs:
-      - smoke_test
+      - create_infrastructure
+      - smoke_test:
+          requires: [create_infrastructure]
