@@ -23,10 +23,15 @@ jobs:
           fingerprints:
             - a1:89:9c:0e:de:3b:c0:c3:d1:82:40:8f:8b:ad:1f:4d
       - run:
+          name: Update packages
+          command: |
+            sudo apt update && \
+            sudo apt install software-properties-common && \
+            sudo add-apt-repository --yes --update ppa:ansible/ansible
+      - run:
           name: Install Ansible
           command: |
-            sudo apt-get -y install python3-pip && \
-            pip install --user ansible
+            sudo apt install ansible
       - run:
           name: Run Playbook and Configure server
           command: |
