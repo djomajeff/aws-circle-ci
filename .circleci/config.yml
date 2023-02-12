@@ -2,8 +2,6 @@ version: 2.1
 
 commands:
   destroy_environment:
-    docker:
-      - image: amazon/aws-cli
     steps:
       - run:
           name: Destroy environment
@@ -55,6 +53,9 @@ jobs:
       - run:
           name: Test job
           command: return 1
+      - run:
+          name: install aws
+          command: sudo apt install awscli
       - destroy_environment
       # - run: apk add --update curl
       # - run:
