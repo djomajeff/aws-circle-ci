@@ -31,9 +31,6 @@ jobs:
           command: |
             ansible-playbook main.yml -i inventory.txt
 
-            docker:
-      - image: cimg/base:stable
-
 workflows:
   configure_infrastructure:
     jobs:
