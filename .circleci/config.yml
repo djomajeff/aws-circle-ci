@@ -7,7 +7,6 @@ commands:
           name: Destroy environment
           when: on_fail
           command: |
-            sudo apt install awscli && \
             aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:7}
 
 jobs:
@@ -49,7 +48,7 @@ jobs:
 
   smoke_test:
     docker:
-      - image: cimg/base:stable
+      - image: amazon/aws-cli
     steps:
       - run:
           name: Test job
