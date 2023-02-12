@@ -7,6 +7,7 @@ commands:
           name: Destroy environment
           when: on_fail
           command: |
+            sudo apt install awscli && \
             aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:7}
 
 jobs:
@@ -53,9 +54,6 @@ jobs:
       - run:
           name: Test job
           command: return 1
-      - run:
-          name: install aws
-          command: sudo apt install awscli
       - destroy_environment
       # - run: apk add --update curl
       # - run:
