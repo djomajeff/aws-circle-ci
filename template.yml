@@ -8,7 +8,7 @@ Resources:
         - !Ref InstanceSecurityGroup
       KeyName: udacity
       ImageId: ami-0557a15b87f6559cf
-      InstanceType: t3.micro
+      InstanceType: t2.micro
   InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
