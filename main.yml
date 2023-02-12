@@ -1,6 +1,6 @@
 ---
 - name: Exercise for setting up a web server in an EC2
-  hosts: 54.237.58.197
+  hosts: all
   user: ubuntu
   become: true
   become_method: sudo
