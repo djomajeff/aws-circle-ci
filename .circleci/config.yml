@@ -16,17 +16,23 @@ jobs:
 
   configure_infrastructure:
     docker:
-      - image: python:3.7-alpine3.11
+      - image: cimg/base:stable
     steps:
       - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - a1:89:9c:0e:de:3b:c0:c3:d1:82:40:8f:8b:ad:1f:4d
       - run:
           name: Install Ansible
           command: |
-            apk add --update ansible
+            pip install --user ansible
       - run:
           name: Run Playbook and Configure server
           command: |
             ansible-playbook main.yml -i inventory.txt
+
+            docker:
+      - image: cimg/base:stable
 
 workflows:
   configure_infrastructure:
