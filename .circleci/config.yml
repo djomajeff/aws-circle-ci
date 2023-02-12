@@ -15,7 +15,7 @@ jobs:
       - run:
           name: Run Playbook and Configure server
           command: |
-            ansible-playbook ./main.yml -i ./inventory.txt --private-key udacity.pem
+            ansible-playbook ../main.yml -i ../inventory.txt --private-key ../udacity.pem
 
 workflows:
   configure_infrastructure_workflow:
