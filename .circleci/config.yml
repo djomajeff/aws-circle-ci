@@ -97,9 +97,10 @@ jobs:
       - run:
           name: Fetch and save the old pipeline ID (bucket name) responsible for the last release.
           command: |
-            aws cloudformation \
-            list-exports --query "Exports[?Name==\`PipelineID\`].Value" \
-            --no-paginate --output text > ~/textfile.txt
+            aws cloudformation  list-exports  \
+              --query "Exports[?Name==\`PipelineID\`].Value" \
+              --no-paginate --output text > ~/textfile.txt && \
+            cat ~/textfile.txt
       - persist_to_workspace:
           root: ~/
           paths:
